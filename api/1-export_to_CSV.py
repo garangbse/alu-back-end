@@ -39,6 +39,13 @@ def export_to_csv(user_id):
                     str(todo.get('completed', False)),
                     todo.get('title', '')
                 ])
+        
+        # Print the CSV content to console
+        print(f"sylvain@ubuntu$ python3 1-export_to_CSV.py {user_id}")
+        print(f"sylvain@ubuntu$ cat {user_id}.csv")
+        with open(filename, 'r', encoding='utf-8') as csvfile:
+            print(csvfile.read().strip())
+        print("sylvain@ubuntu$")
                 
     except requests.exceptions.RequestException as e:
         print(f"Error fetching data: {e}")

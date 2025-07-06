@@ -1,10 +1,6 @@
 #!/usr/bin/python3
 """
-Script that fetches and displays employee TODO list progress from a REST API.
-
-This module provides functionality to retrieve and display an employee's
-TODO list progress from the JSONPlaceholder API, showing completion statistics
-and completed task titles.
+Script that fetches and displays employee TODO list progress from a REST API
 """
 
 import requests
@@ -33,7 +29,10 @@ def get_employee_todo_progress(employee_id):
         
         # Calculate progress
         total_tasks = len(todos_data)
-        completed_tasks = [todo for todo in todos_data if todo.get('completed')]
+        completed_tasks = []
+        for todo in todos_data:
+            if todo.get('completed'):
+                completed_tasks.append(todo)
         number_of_done_tasks = len(completed_tasks)
         
         # Display results
@@ -62,3 +61,4 @@ if __name__ == "__main__":
     except ValueError:
         print("Employee ID must be an integer")
         sys.exit(1)
+        

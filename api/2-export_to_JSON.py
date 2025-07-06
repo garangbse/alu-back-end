@@ -1,12 +1,11 @@
-import json
-import requests
-import sys
-
 #!/usr/bin/python3
 """
 Script that exports employee TODO list progress to JSON format
 """
 
+import json
+import requests
+import sys
 
 
 def export_employee_todo_to_json(employee_id):

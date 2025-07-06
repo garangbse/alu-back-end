@@ -1,11 +1,11 @@
-import csv
-import requests
-import sys
-
 #!/usr/bin/python3
 """
 Script to export employee TODO list to CSV format
 """
+
+import csv
+import requests
+import sys
 
 
 def export_to_csv(user_id):
@@ -19,7 +19,7 @@ def export_to_csv(user_id):
         user_response = requests.get(user_url)
         user_response.raise_for_status()
         user_data = user_response.json()
-        username = user_data['username']
+        username = user_data.get('username', '')
         
         # Get user's todos
         todos_response = requests.get(todos_url)
@@ -36,14 +36,12 @@ def export_to_csv(user_id):
                 writer.writerow([
                     str(user_id),
                     username,
-                    str(todo['completed']),
-                    todo['title']
+                    str(todo.get('completed', False)),
+                    todo.get('title', '')
                 ])
                 
     except requests.exceptions.RequestException as e:
         print(f"Error fetching data: {e}")
-    except KeyError as e:
-        print(f"Error parsing data: {e}")
     except Exception as e:
         print(f"An error occurred: {e}")
 
